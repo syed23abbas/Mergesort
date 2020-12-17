@@ -4,10 +4,6 @@ class Test {
 
     public static void main(String[] args) {
         int[] arr = {-1, 12, 3, 20, -5, 13, 40, -30, 35, 2, 6, -16, 25, 23, 10};
-        // len=15    -30, 12, 2, 6, -16, 13, 23, -1, 35, 3, 20, -5, 25, 40, 10
-        //           -30, -16, 2, 6, -1, 13, 3, 12, -5, 23, 20, 10, 25, 40, 35
-        //int [] arr = {4, 3, 1, 2};
-        // {35,-15}, {25, 35, -15}, {7, 55}, {1, -22}, {7, 5, 1, -22}, {20, 35, -15, 7, 55 , 1, -22}
 
         mergesort(arr, 0, arr.length);
 
@@ -17,7 +13,6 @@ class Test {
         }
     }
 
-    // 4, 3, 1, 2
     public static void mergesort (int [] input, int start, int end) {
 
         if (end - start < 2) {
@@ -30,7 +25,6 @@ class Test {
         merge(input, start, mid, end);
     }
 
-    // 4, - 1, 2, 3
     public static void merge(int[] input, int start, int mid, int end) {
         if(input[mid-1] <= input[mid]) {
             return;
