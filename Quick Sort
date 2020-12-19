@@ -1,71 +1,57 @@
-class Test2 {
+import java.util.*;
+
+class Test {
 
     public static void main(String[] args) {
         int[] arr = {-1, 12, 3, 20, -5, 13, 40, -30, 35, 2, 6, -16, 25, 23, 10};
-
+        
         quicksort(arr, 0, arr.length);
 
-        for (int d: arr) {
+        for (int d : arr) {
             System.out.println(d);
         }
     }
 
-    public static void quicksort(int [] arr, int start, int end) {
+    public static void quicksort (int[] arr, int start, int end) {
         if (end - start < 2) {
             return;
         }
-        int pivotindex = pivotindex(arr, start, end);
+
+        int pivotindex = partition(arr, start, end);
         quicksort(arr, start, pivotindex);
         quicksort(arr, pivotindex+1, end);
     }
 
-
-    public static int pivotindex (int [] arr, int start, int end) {
-
-        int pivotindex = start;
+    public static int partition (int [] arr, int start, int end) {
         int pivot = arr[start];
+        int pivotindex = start;
         int i = start;
         int j = end-1;
 
-        outer:
-        while (i <= j) {
-            if (arr[j] <= pivot) {
-                arr[i] = arr[j];
-                i += 1;
-            }
-            else {
-                while (arr[j] >= pivot) {
-                    j -= 1;
-                    if (j < i) {
-                        arr[i] = pivot;
+        while(i<=j) {
+            while (i <= j) {
+                if (arr[j] < pivot) {
+                    arr[i] = arr[j];
+                    i++;
+                    break;
+                } else {
+                    j--;
+                    if (i > j) {
                         pivotindex = i;
-                        break outer;
-                    }
-                    else {
-                        if (arr[j] <= pivot && arr[j] < pivot) {
-                            arr[i] = arr[j];
-                            i += 1;
-                        }
+                        arr[pivotindex] = pivot;
                     }
                 }
             }
-            if (arr[i] >= pivot) {
-                arr[j] = arr[i];
-                j -= 1;
-            }
-            else {
-                while (arr[i] <= pivot) {
-                    i += 1;
+            while (i <= j) {
+                if (arr[i] > pivot) {
+                    arr[j] = arr[i];
+                    j--;
+                    break;
+                } else {
+                    i++;
                     if (i > j) {
-                        arr[j] = pivot;
                         pivotindex = j;
-                        break outer;
-                    }
-                    else {
-                        if (arr[i] >= pivot && arr[i] > pivot) {
-                            arr[j] = arr[i];
-                            j -= 1;
-                        }
+                        arr[pivotindex] = pivot;
                     }
                 }
             }
