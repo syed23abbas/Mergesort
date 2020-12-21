@@ -1,0 +1,54 @@
+class Test2 {
+
+    public static void main(String[] args) {
+        int[] arr = {4, 1, 7, -2, 5};
+
+        mergesort(arr, 0, arr.length);
+
+        for (int d : arr) {
+            System.out.println(d);
+        }
+    }
+
+    public static void mergesort (int[] arr, int start, int end) {
+        if (end-start <2) {
+            return;
+        }
+
+        int mid = (end+start)/2;
+        mergesort(arr, start, mid);
+        mergesort(arr, mid, end);
+        merge(arr, start, mid, end);
+    }
+
+    public static void merge(int[] arr, int start, int mid, int end) {
+        int[] temp = new int [end - start];
+        int ti = 0;
+        int i =start;
+        int j=mid;
+
+        while (i<mid || j<end) {
+            if (j<end && arr[i] > arr[j]) {
+                temp[ti] = arr[j];
+                j++;
+            }
+            else if (j>=end) {
+                temp[ti] = arr[i];
+                i++;
+            }
+            else if (i<mid && arr[i] < arr[j]) {
+                temp[ti] = arr[i];
+                i++;
+            }
+            else if (i>=mid) {
+                temp[ti] = arr[j];
+                j++;
+            }
+            ti++;
+        }
+
+        for (int a=start; a<temp.length+start; a++) {
+            arr[a] = temp[a-start];
+        }
+    }
+}
